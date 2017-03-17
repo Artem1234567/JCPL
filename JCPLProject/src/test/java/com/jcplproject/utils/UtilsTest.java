@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
@@ -54,8 +55,8 @@ public class UtilsTest {
         Throwable thr04 = catchThrowable(() -> Utils.parseThreadCount(args4));
         assertThat(thr04).isInstanceOf(Exception.class).hasMessage(Constants.INCORRECT_VALUE);
         
-        int count11 = Utils.parseThreadCount(args11);
-        assertThat(count11).isEqualTo(expCount11);
+        Optional<Integer> count11 = Utils.parseThreadCount(args11);
+        assertThat(count11.get()).isEqualTo(expCount11);
         
         Throwable thr05 = catchThrowable(() -> Utils.parseThreadCount(args12));
         assertThat(thr05).isInstanceOf(Exception.class).hasMessage(Constants.INCORRECT_VALUE);
@@ -64,8 +65,8 @@ public class UtilsTest {
         Throwable thr07 = catchThrowable(() -> Utils.parseThreadCount(args14));
         assertThat(thr07).isInstanceOf(Exception.class).hasMessage(Constants.INCORRECT_VALUE);
         
-        int count15 = Utils.parseThreadCount(args15);
-        assertThat(count15).isEqualTo(expCount15);
+        Optional<Integer> count15 = Utils.parseThreadCount(args15);
+        assertThat(count15.get()).isEqualTo(expCount15);
     }
 
     @Test

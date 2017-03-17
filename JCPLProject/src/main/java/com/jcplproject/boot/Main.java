@@ -4,6 +4,7 @@ import com.jcplproject.constants.Constants;
 import com.jcplproject.utils.Utils;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jsoup.HttpStatusException;
@@ -24,7 +25,10 @@ public class Main {
         Main m = new Main();
         
         try {
-            threadsCount = Utils.parseThreadCount(args);
+            Optional<Integer> thCount = Utils.parseThreadCount(args);
+            if (thCount.isPresent()) {
+                threadsCount = thCount.get();
+            }
             
             Document doc = Utils.loadLinkDocument(Constants.MAIN_PAGE_URL);
             

@@ -6,6 +6,7 @@ import com.jcplproject.multi.WriterTask;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -21,7 +22,7 @@ public class Utils {
 
     private static final Logger LOGGER = Logger.getLogger(Utils.class.getName());
     
-    public static int parseThreadCount(String[] args) throws Exception {
+    public static Optional<Integer> parseThreadCount(String[] args) throws Exception {
         try {
             if (args == null) {
                 throw new Exception(Constants.WRONG_ARGS);
@@ -30,7 +31,8 @@ public class Utils {
             }
             int threadsCount = Integer.parseInt(args[0]);
             check(threadsCount);
-            return threadsCount;
+            return Optional.of(threadsCount);
+            
         } catch(NumberFormatException ex) {
             throw new Exception(Constants.INCORRECT_VALUE);
         }
