@@ -2,6 +2,7 @@ package com.jcplproject.multi.utils;
 
 import com.jcplproject.utils.Utils;
 import java.io.IOException;
+import java.util.Optional;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,9 +37,9 @@ public class MultiUtilsTest {
         Throwable thr2 = catchThrowable(() -> Utils.loadLinkDocument(linkURLEmp1));
         assertThat(thr2).isInstanceOf(IllegalArgumentException.class);
         
-        Document result1 = Utils.loadLinkDocument(linkURL0);
+        Optional<Document> result1 = Utils.loadLinkDocument(linkURL0);
         assertThat(result1).isNotNull();
-        assertThat(result1.body().data()).isEqualTo(expResult.body().data());
+        assertThat(result1.get().body().data()).isEqualTo(expResult.body().data());
         
         Throwable thr01 = catchThrowable(() -> Utils.loadLinkDocument(linkURL1));
         assertThat(thr01).isInstanceOf(HttpStatusException.class).hasMessage(errMess01);

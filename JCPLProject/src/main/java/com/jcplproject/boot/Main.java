@@ -30,10 +30,13 @@ public class Main {
                 threadsCount = thCount.get();
             }
             
-            Document doc = Utils.loadLinkDocument(Constants.MAIN_PAGE_URL);
-            
-            List<String> links = Utils.loadLinks(doc, threadsCount);
-            Utils.savePages(links, threadsCount);
+            Optional<Document> doc = Utils.loadLinkDocument(Constants.MAIN_PAGE_URL);
+            if (!doc.isPresent()) {
+                LOGGER.severe(Constants.WRONG_DOC);
+            } else {
+                List<String> links = Utils.loadLinks(doc.get(), threadsCount);
+                Utils.savePages(links, threadsCount);
+            }
             
         } catch(HttpStatusException ex) {
             LOGGER.log(Level.SEVERE, Constants.CONNECTION_ERROR, Constants.MAIN_PAGE_URL);

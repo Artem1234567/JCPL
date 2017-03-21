@@ -100,11 +100,11 @@ public class Utils {
         LOGGER.log(Level.INFO, Constants.PAGES_LOADED, counterValue);
     }
     
-    public static Document loadLinkDocument(String linkURL) throws IOException {
+    public static Optional<Document> loadLinkDocument(String linkURL) throws IOException {
         if (linkURL == null || linkURL.trim().isEmpty()) {
             throw new IllegalArgumentException(Constants.WRONG_LINK_URL);
         }
         Connection.Response resp = Jsoup.connect(linkURL).execute();
-        return resp.parse();
+        return Optional.ofNullable(resp.parse());
     }
 }
